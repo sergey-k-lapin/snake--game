@@ -3,16 +3,16 @@
     const keys = (e) => {
         switch(e.keyCode) {
             case 87: case 38: //W - Up
-                if (direction != 3) direction = 1;
+                if (currentDirection != 3) direction = 1;
                 break;
             case 65: case 37://A - Left
-                if (direction != 4) direction = 2;
+                if (currentDirection != 4) direction = 2;
                 break;
             case 83: case 40://S - Down
-                if (direction != 1) direction = 3;
+                if (currentDirection != 1) direction = 3;
                 break;
             case 68: case 39://D - Right
-                if (direction != 2) direction = 4;
+                if (currentDirection != 2) direction = 4;
                 break;
         }
     }
@@ -45,6 +45,8 @@
     let col = 5;
     let row = 6;
     let direction = 1;
+    let currentDirection = direction;
+
     let appleScore = 0;
     let appleCol = cols;
     let appleRow = rows;
@@ -173,7 +175,8 @@
 
     let apple = createApple(appleCol, appleRow);
 
-    const move = (direction) => {
+    const move = (_direction) => {
+        currentDirection = _direction;
         switch (direction){
             case 1:
                 row = clamp(row-1, 0, rows-1);
