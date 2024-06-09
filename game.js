@@ -3,16 +3,16 @@
     const keys = (e) => {
         switch(e.keyCode) {
             case 87: case 38: //W - Up
-                if (currentDirection != 3) direction = 1;
+                if (currentDirection != 2) direction = 0;
                 break;
             case 65: case 37://A - Left
-                if (currentDirection != 4) direction = 2;
+                if (currentDirection != 3) direction = 1;
                 break;
             case 83: case 40://S - Down
-                if (currentDirection != 1) direction = 3;
+                if (currentDirection != 0) direction = 2;
                 break;
             case 68: case 39://D - Right
-                if (currentDirection != 2) direction = 4;
+                if (currentDirection != 1) direction = 3;
                 break;
         }
     }
@@ -44,7 +44,7 @@
     let tail = 0;
     let col = 5;
     let row = 6;
-    let direction = 1;
+    let direction = 0;
     let currentDirection = direction;
 
     let appleScore = 0;
@@ -55,6 +55,14 @@
     let snakeLength = 0;
     let playerScore = 0;
     let game = 0;
+
+
+    const moveDirection=[
+        () => { row = clamp(row-1, 0, rows-1) },
+        () => { col = clamp(col-1, 0, cols-1) },
+        () => { row = clamp(row+1, 0, rows-1) },
+        () => { col = clamp(col+1, 0, cols-1) }
+    ];
 
     const clamp = (value, min, max) => {
         if (value > max) return min;
@@ -177,21 +185,7 @@
 
     const move = (_direction) => {
         currentDirection = _direction;
-        switch (direction){
-            case 1:
-                row = clamp(row-1, 0, rows-1);
-                break;
-            case 2:
-                col = clamp(col-1, 0, cols-1);
-                break;
-            case 3:
-                row = clamp(row+1, 0, rows-1);
-                break;
-            case 4:
-                col = clamp(col+1, 0, cols-1);
-                break;
-            }
-
+        moveDirection[direction]();
         if (collision(col, row)){
             window.clearInterval(game);
             window.alert(`GAME OVER!\nScore:${playerScore}`);
