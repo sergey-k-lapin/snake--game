@@ -2,6 +2,9 @@
 
     const keys = (e) => {
         switch(e.keyCode) {
+            case 27:
+                if (confirm('Exit?')) exit();
+                break;
             case 87: case 38: //W - Up
                 if (currentDirection != 2) direction = 0;
                 break;
@@ -56,6 +59,12 @@
     let playerScore = 0;
     let game = 0;
 
+
+    const exit = ()=>{
+        window.removeEventListener('keydown', keys);
+        window.clearInterval(game);
+        document.body.removeChild(screen);
+    }
 
     const moveDirection=[
         () => { row = clamp(row-1, 0, rows-1) },
@@ -187,9 +196,8 @@
         currentDirection = _direction;
         moveDirection[direction]();
         if (collision(col, row)){
-            window.clearInterval(game);
             window.alert(`GAME OVER!\nScore:${playerScore}`);
-            document.body.removeChild(screen);
+            exit();
             return;
         }
 
