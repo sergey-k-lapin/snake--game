@@ -99,7 +99,7 @@
             rowBuffer[_head] = _row;
             snakeLength++;    
         } else {
-            console.warn('You snake is huge, if you know what I mean.');
+            console.warn('Your snake is huge, if you know what I mean.');
         }
     }
 
