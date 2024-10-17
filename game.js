@@ -45,6 +45,9 @@
             if (a > b) return a - b;
             return b - a;
         }
+        window.addEventListener('gesturestart', (e)=>{
+            e.preventDefault()
+        }, {passive: false, capture:true});        
         window.addEventListener('touchstart', (e) => {
             touchX = e.touches[0].clientX;
             touchY = e.touches[0].clientY;
