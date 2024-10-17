@@ -35,6 +35,7 @@
     screen.style.position = 'fixed';
     screen.style.left = left + 'px';
     screen.style.top = top + 'px';
+    screen.style.touchAction = 'none';
     document.title = '8-bit style Snake game by SERЁGA. Code is suitable for MOS 6502, Z80, I8080 and others.'
     document.body.appendChild(screen);
 
